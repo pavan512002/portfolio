@@ -200,6 +200,9 @@ body::before {
 .card-kind { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; }
 .badge.live { color: var(--green); font-size: 12px; font-weight: 600; letter-spacing: 0.5px; }
 .card h3 { font-size: 24px; }
+.pub-authors { font-size: 14px; color: var(--muted); margin: 10px 0 4px; }
+.pub-authors strong { color: var(--text); }
+.pub-venue { font-size: 13px; color: var(--muted); font-style: italic; margin: 0 0 10px; }
 .card p { color: var(--muted); font-size: 15px; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .tags span {
