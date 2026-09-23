@@ -32,6 +32,8 @@ let live = false;
 let cameraOn = false;
 let stream = null;
 let lastVideoTime = -1;
+let lastDetectTime = 0;
+const DETECT_INTERVAL = 50; // hand tracking at ~20fps is plenty; saves CPU/GPU
 let gestureCmd = 'stop';
 let keyCmd = null;
 let lastHandTime = 0;
@@ -229,6 +231,9 @@ function loop() {
   if (!landmarker || !cameraOn || video.readyState < 2) return;
   if (video.currentTime === lastVideoTime) return;
   lastVideoTime = video.currentTime;
+  // Throttle the heavy hand-tracking work; the car animation still runs every frame.
+  if (now - lastDetectTime < DETECT_INTERVAL) return;
+  lastDetectTime = now;
 
   const res = landmarker.detectForVideo(video, now);
   const lm = res.landmarks && res.landmarks[0];
