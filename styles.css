@@ -195,6 +195,23 @@ html { scroll-behavior: smooth; }
   50% { background-position: 100% 50%; }
 }
 
+/* ---------- experience timeline ---------- */
+.timeline { display: flex; flex-direction: column; }
+.t-item { position: relative; padding: 0 0 34px 30px; border-left: 2px solid var(--border); margin-left: 8px; }
+.t-item:last-child { padding-bottom: 0; }
+.t-item::before {
+  content: ""; position: absolute; left: -7px; top: 5px; width: 12px; height: 12px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  box-shadow: 0 0 16px rgba(99, 102, 241, 0.6);
+}
+.t-date { color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; }
+.t-item h3 { font-size: 20px; margin: 6px 0 2px; }
+.t-org { color: #c4b5fd; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.t-item ul { padding-left: 18px; color: var(--muted); font-size: 14.5px; display: flex; flex-direction: column; gap: 7px; max-width: 720px; }
+
+/* ---------- contact ---------- */
+.contact-grid { display: flex; gap: 12px; flex-wrap: wrap; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal, .enter { opacity: 1 !important; transform: none !important; }

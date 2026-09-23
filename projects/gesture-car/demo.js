@@ -172,12 +172,12 @@ function updateCar(now) {
   car.x += Math.cos(car.angle) * car.speed * dt;
   car.y += Math.sin(car.angle) * car.speed * dt;
 
-  // soft walls
-  const m = 30;
-  if (car.x < m) { car.x = m; car.speed *= -0.25; }
-  if (car.x > 640 - m) { car.x = 640 - m; car.speed *= -0.25; }
-  if (car.y < m) { car.y = m; car.speed *= -0.25; }
-  if (car.y > 420 - m) { car.y = 420 - m; car.speed *= -0.25; }
+  // open world: no walls — the car wraps around instead of stopping
+  const m = 40;
+  if (car.x < -m) car.x += 640 + 2 * m;
+  else if (car.x > 640 + m) car.x -= 640 + 2 * m;
+  if (car.y < -m) car.y += 420 + 2 * m;
+  else if (car.y > 420 + m) car.y -= 420 + 2 * m;
 
   drawTrack();
   drawCar();
