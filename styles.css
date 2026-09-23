@@ -139,5 +139,63 @@ footer {
 footer a { color: var(--text); }
 
 /* ---------- reveal animation ---------- */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.22,1,0.36,1); }
 .reveal.visible { opacity: 1; transform: none; }
+
+/* ---------- motion & polish ---------- */
+html { scroll-behavior: smooth; }
+
+/* animated hero background */
+.hero { position: relative; overflow: clip; }
+.orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.32; pointer-events: none; }
+.orb-a { width: 440px; height: 440px; background: #6366f1; top: -140px; right: -100px; animation: drift 14s ease-in-out infinite alternate; }
+.orb-b { width: 340px; height: 340px; background: #a855f7; bottom: -160px; left: 8%; animation: drift 19s ease-in-out infinite alternate-reverse; }
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-70px, 60px) scale(1.18); }
+}
+
+/* staggered hero entrance */
+.enter { opacity: 0; transform: translateY(28px); animation: rise 0.9s cubic-bezier(0.22,1,0.36,1) forwards; }
+.enter-1 { animation-delay: 0.05s; }
+.enter-2 { animation-delay: 0.18s; }
+.enter-3 { animation-delay: 0.32s; }
+.enter-4 { animation-delay: 0.46s; }
+@keyframes rise { to { opacity: 1; transform: none; } }
+
+/* tech marquee */
+.marquee { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 15px 0; }
+.marquee-track {
+  display: inline-flex; gap: 26px; width: max-content; white-space: nowrap;
+  color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
+  animation: scroll 30s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes scroll { to { transform: translateX(-50%); } }
+
+/* nav shadow on scroll */
+.nav.scrolled { box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45); }
+
+/* card hover glow */
+.card { position: relative; }
+.card:hover { transform: translateY(-6px); border-color: #3d3d55; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35); }
+
+/* command pill pulse on change */
+.hud-cmd.pulse { animation: pulse 0.45s ease; }
+@keyframes pulse {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.14); }
+  100% { transform: scale(1); }
+}
+
+/* gradient text shimmer on hero */
+.gradient { background-size: 200% 200%; animation: shimmer 8s ease-in-out infinite; }
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal, .enter { opacity: 1 !important; transform: none !important; }
+}

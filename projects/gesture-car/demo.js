@@ -184,7 +184,12 @@ function updateCar(now) {
 
   // HUD
   const label = cmd === 'stop' ? 'stop' : cmd;
-  hudCmd.textContent = label;
+  if (hudCmd.textContent !== label) {
+    hudCmd.textContent = label;
+    hudCmd.classList.remove('pulse');
+    void hudCmd.offsetWidth; // restart the animation
+    hudCmd.classList.add('pulse');
+  }
   hudCmd.classList.toggle('go', cmd !== 'stop');
 }
 
