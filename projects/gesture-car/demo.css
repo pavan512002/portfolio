@@ -48,6 +48,8 @@
 }
 
 .demo-sub { color: var(--muted); margin-bottom: 8px; }
+.demo-controls { display: flex; align-items: center; gap: 18px; margin: 6px 0 4px; flex-wrap: wrap; }
+#stop-btn { padding: 10px 22px; font-size: 14px; }
 .fine { color: var(--muted); font-size: 13px; margin-top: 10px; }
 .fine kbd {
   background: #1d1d29; border: 1px solid var(--border); border-radius: 6px;

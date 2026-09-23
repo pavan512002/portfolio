@@ -34,7 +34,7 @@
     <!-- ============ LIVE DEMO ============ -->
     <section class="demo" id="demo">
       <h2>🎥 Live demo — drive with your hand</h2>
-      <p class="demo-sub">Allow camera access, show your hand, and the car follows your fingers. No hand = stop.</p>
+      <p class="demo-sub">Allow camera access, show your hand, and the car follows your fingers. No hand = stop. The car stays stopped until you take your hand away and show a new gesture.</p>
 
       <div class="gesture-map">
         <div class="gesture"><div class="fingers">☝️</div><div class="cmd">1 finger</div><div class="desc">Forward</div></div>
@@ -57,7 +57,11 @@
         </div>
         <canvas id="track" width="640" height="420"></canvas>
       </div>
-      <p class="fine">Tip: no camera? Use your <kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> arrow keys instead. Everything runs locally in your browser — no video ever leaves your device.</p>
+      <div class="demo-controls">
+        <button id="stop-btn" class="btn ghost">⏹ Stop car</button>
+        <button id="cam-stop" class="btn ghost" hidden>📷 Stop camera</button>
+        <p class="fine" style="margin: 0;">Tip: no camera? Use your <kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> arrow keys instead. Everything runs locally in your browser — no video ever leaves your device.</p>
+      </div>
     </section>
 
     <!-- ============ HOW IT WORKS ============ -->

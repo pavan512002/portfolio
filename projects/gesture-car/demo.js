@@ -29,10 +29,15 @@ const HAND_CONNECTIONS = [
 // ---- state ---------------------------------------------------------------
 let landmarker = null;
 let live = false;
+let cameraOn = false;
+let stream = null;
 let lastVideoTime = -1;
 let gestureCmd = 'stop';
 let keyCmd = null;
 let lastHandTime = 0;
+// holdStop: stays on after the Stop button until the hand leaves the frame,
+// so a still-raised hand can't instantly re-trigger the car.
+let holdStop = false;
 const recentCounts = [];
 
 // ---- car -----------------------------------------------------------------
@@ -48,13 +53,14 @@ function countToCmd(n) {
     : 'stop';
 }
 
-// Same counting rule as hand_module.py: a finger is "up" when its tip is
-// above its knuckle; the thumb is "up" when its tip sits past the joint,
-// sideways — direction depends on which hand it is.
-function countFingers(lm, handedness) {
+// Thumb is "up" when its tip is clearly farther from the wrist than its
+// middle joint — no left/right guess needed, so a fist can never
+// misread as "1 finger = forward".
+function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
+
+function countFingers(lm) {
   let n = 0;
-  const right = handedness === 'Right';
-  if (right ? lm[4].x > lm[3].x : lm[4].x < lm[3].x) n++;
+  if (dist(lm[4], lm[0]) > dist(lm[3], lm[0]) * 1.2) n++;
   for (const t of [8, 12, 16, 20]) {
     if (lm[t].y < lm[t - 2].y) n++;
   }
@@ -76,6 +82,7 @@ function pushCount(c) {
 
 function effectiveCmd(now) {
   if (keyCmd) return keyCmd;
+  if (holdStop) return 'stop'; // Stop button holds until the hand leaves
   if (now - lastHandTime > 700) return 'stop'; // lost the hand -> stop
   return gestureCmd;
 }
@@ -219,7 +226,7 @@ function loop() {
   requestAnimationFrame(loop);
   const now = performance.now();
   if (live) updateCar(now);
-  if (!landmarker || video.readyState < 2) return;
+  if (!landmarker || !cameraOn || video.readyState < 2) return;
   if (video.currentTime === lastVideoTime) return;
   lastVideoTime = video.currentTime;
 
@@ -227,12 +234,12 @@ function loop() {
   const lm = res.landmarks && res.landmarks[0];
   if (lm) {
     lastHandTime = now;
-    const handed = res.handedness?.[0]?.[0]?.categoryName || 'Right';
-    const c = countFingers(lm, handed);
+    const c = countFingers(lm);
     hudCount.textContent = c;
-    pushCount(c);
+    if (!holdStop) pushCount(c); // still show the count, but don't steer while stopped
     drawOverlay(lm);
   } else {
+    holdStop = false; // hand left the frame -> new gestures allowed again
     drawOverlay(null);
   }
 }
@@ -261,8 +268,8 @@ camBtn.addEventListener('click', async () => {
     if (!window.isSecureContext) {
       throw new Error('Camera needs HTTPS (or localhost). This page should be served over HTTPS.');
     }
-    await initLandmarker();
-    const stream = await navigator.mediaDevices.getUserMedia({
+    if (!landmarker) await initLandmarker();
+    stream = await navigator.mediaDevices.getUserMedia({
       video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'user' },
     });
     video.srcObject = stream;
@@ -270,6 +277,8 @@ camBtn.addEventListener('click', async () => {
     overlay.width = video.videoWidth || 640;
     overlay.height = video.videoHeight || 480;
     camWrap.classList.add('live');
+    cameraOn = true;
+    camStopBtn.hidden = false;
     live = true;
     lastHandTime = performance.now();
     hudCmd.textContent = 'show your hand';
@@ -287,6 +296,41 @@ camBtn.addEventListener('click', async () => {
     live = true;
     requestAnimationFrame(loop);
   }
+});
+
+// ---- stop camera ----------------------------------------------------------
+const camStopBtn = document.getElementById('cam-stop');
+camStopBtn.addEventListener('click', () => {
+  if (stream) {
+    stream.getTracks().forEach((t) => t.stop());
+    stream = null;
+  }
+  video.srcObject = null;
+  cameraOn = false;
+  holdStop = false;
+  gestureCmd = 'stop';
+  recentCounts.length = 0;
+  camWrap.classList.remove('live');
+  camBtn.disabled = false;
+  camBtn.textContent = 'Enable camera';
+  camStopBtn.hidden = true;
+  hudCount.textContent = '–';
+  hudCmd.textContent = 'camera off';
+  hudCmd.classList.remove('go');
+  drawOverlay(null);
+});
+
+// ---- stop car -------------------------------------------------------------
+const stopBtn = document.getElementById('stop-btn');
+stopBtn.addEventListener('click', () => {
+  recentCounts.length = 0;
+  gestureCmd = 'stop';
+  keyCmd = null;
+  car.speed = 0;
+  holdStop = true; // stays stopped until the hand leaves the frame
+  hudCount.textContent = '–';
+  hudCmd.textContent = 'stop';
+  hudCmd.classList.remove('go');
 });
 
 // ---- keyboard fallback -----------------------------------------------------
