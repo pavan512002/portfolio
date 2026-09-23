@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pavan — Builder</title>
+  <meta name="description" content="Pavan builds things that move — from gesture-controlled robots to Chrome extensions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="logo">pavan<span class="accent">.</span></a>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="https://github.com/pavan512002" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <p class="hero-kicker">Hey, I'm Pavan</p>
+    <h1>I build things<br>that <span class="gradient">move.</span></h1>
+    <p class="hero-sub">From a robot car driven by hand gestures to a Chrome extension that finds your free time — I like turning ideas into things you can touch and try.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn primary">See my work</a>
+      <a href="https://github.com/pavan512002" target="_blank" rel="noopener" class="btn ghost">GitHub →</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <div class="cards">
+
+        <article class="card featured">
+          <div class="card-top">
+            <span class="badge live">● Live demo</span>
+            <span class="card-kind">Hardware + AI</span>
+          </div>
+          <h3>Gesture-Controlled Robot Car</h3>
+          <p>Drive a robot car with nothing but your hand. A webcam tracks your fingers with MediaPipe, and each gesture steers the car over Bluetooth — 1 finger forward, 2 back, 3 left, 4 right, fist to stop.</p>
+          <div class="tags">
+            <span>Python</span><span>MediaPipe</span><span>OpenCV</span><span>Arduino</span><span>Bluetooth</span>
+          </div>
+          <div class="card-actions">
+            <a href="projects/gesture-car/" class="btn primary">Try the live demo →</a>
+            <a href="https://github.com/pavan512002/gesture_controlled_robot" target="_blank" rel="noopener" class="btn ghost">Code</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <span class="card-kind">Chrome Extension</span>
+          </div>
+          <h3>Calendar Slot Finder</h3>
+          <p>Find, share and convert available time slots from Google Calendar. Four modes: Solo availability, Team overlap, a visual week picker, and a timezone converter — with Pro billing via Lemon Squeezy.</p>
+          <div class="tags">
+            <span>JavaScript</span><span>Chrome MV3</span><span>OAuth</span><span>Supabase</span><span>Lemon Squeezy</span>
+          </div>
+          <div class="card-actions">
+            <a href="projects/freeslot/" class="btn primary">Learn more →</a>
+            <a href="https://github.com/pavan512002/freeslot" target="_blank" rel="noopener" class="btn ghost">Code</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <h2>About</h2>
+      <div class="about-grid">
+        <p>I'm a builder who learns by shipping. I work across the stack — embedded systems and computer vision on one end, browser extensions and web apps on the other. If it involves turning a terse idea into something real and demoable, I'm in.</p>
+        <ul class="skills">
+          <li>Python · C++ (Arduino)</li>
+          <li>JavaScript · Chrome Extensions</li>
+          <li>Computer Vision (MediaPipe, OpenCV)</li>
+          <li>Payments & backends (Supabase, Lemon Squeezy)</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built by Pavan · <a href="https://github.com/pavan512002" target="_blank" rel="noopener">GitHub</a></p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+/* Demo: camera + track canvas layout */
+.demo-stage {
+  display: grid; gap: 20px; grid-template-columns: 1fr 1.4fr;
+  margin: 24px 0 12px;
+}
+@media (max-width: 860px) { .demo-stage { grid-template-columns: 1fr; } }
+
+.cam-wrap {
+  position: relative; background: #000; border-radius: 16px; overflow: hidden;
+  border: 1px solid var(--border); aspect-ratio: 4 / 3;
+  display: flex; align-items: center; justify-content: center;
+}
+.cam-wrap video, .cam-wrap canvas#overlay {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  transform: scaleX(-1); /* selfie mirror */
+}
+.cam-wrap video { visibility: hidden; }
+.cam-wrap.live video { visibility: visible; }
+
+.hud {
+  position: absolute; top: 12px; left: 12px; display: flex; gap: 10px; align-items: center;
+  z-index: 3;
+}
+.hud-count {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: rgba(10, 10, 16, 0.75); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Grotesk'; font-size: 26px; font-weight: 700;
+}
+.hud-cmd {
+  background: rgba(10, 10, 16, 0.75); border: 1px solid var(--border);
+  border-radius: 999px; padding: 8px 16px; font-size: 13px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.hud-cmd.go { color: var(--green); border-color: rgba(34, 197, 94, 0.5); }
+
+#cam-btn { position: relative; z-index: 2; }
+.cam-wrap.live #cam-btn { display: none; }
+.cam-error {
+  position: absolute; bottom: 14px; left: 14px; right: 14px; z-index: 3;
+  background: rgba(153, 27, 27, 0.9); border-radius: 10px; padding: 10px 14px; font-size: 13px;
+}
+
+#track {
+  width: 100%; height: auto; border-radius: 16px;
+  border: 1px solid var(--border); background: #0d0d15;
+  aspect-ratio: 640 / 420;
+}
+
+.demo-sub { color: var(--muted); margin-bottom: 8px; }
+.fine { color: var(--muted); font-size: 13px; margin-top: 10px; }
+.fine kbd {
+  background: #1d1d29; border: 1px solid var(--border); border-radius: 6px;
+  padding: 1px 7px; font-family: inherit; font-size: 12px;
+}

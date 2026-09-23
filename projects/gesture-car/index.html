@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gesture-Controlled Robot Car — Pavan</title>
+  <meta name="description" content="Drive a robot car with hand gestures. Try the live browser demo — your webcam becomes the controller.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="../../index.html" class="logo">pavan<span class="accent">.</span></a>
+    <div class="nav-links">
+      <a href="../../index.html#projects">Projects</a>
+      <a href="https://github.com/pavan512002/gesture_controlled_robot" target="_blank" rel="noopener">Code</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <a href="../../index.html#projects" class="back">← All projects</a>
+    <h1>Gesture-Controlled <span class="gradient">Robot Car</span></h1>
+    <p class="lede">Hold up fingers, and a car moves. A webcam tracks your hand with MediaPipe, counts your fingers, and steers a robot car wirelessly over Bluetooth. Try it below — your camera becomes the controller.</p>
+
+    <div class="tags" style="margin-bottom: 36px;">
+      <span>Python</span><span>MediaPipe</span><span>OpenCV</span><span>Arduino</span><span>Bluetooth HC-05</span>
+    </div>
+
+    <!-- ============ LIVE DEMO ============ -->
+    <section class="demo" id="demo">
+      <h2>🎥 Live demo — drive with your hand</h2>
+      <p class="demo-sub">Allow camera access, show your hand, and the car follows your fingers. No hand = stop.</p>
+
+      <div class="gesture-map">
+        <div class="gesture"><div class="fingers">☝️</div><div class="cmd">1 finger</div><div class="desc">Forward</div></div>
+        <div class="gesture"><div class="fingers">✌️</div><div class="cmd">2 fingers</div><div class="desc">Backward</div></div>
+        <div class="gesture"><div class="fingers">🤟</div><div class="cmd">3 fingers</div><div class="desc">Left</div></div>
+        <div class="gesture"><div class="fingers">🖖</div><div class="cmd">4 fingers</div><div class="desc">Right</div></div>
+        <div class="gesture"><div class="fingers">✊</div><div class="cmd">Fist / 5</div><div class="desc">Stop</div></div>
+      </div>
+
+      <div class="demo-stage">
+        <div class="cam-wrap">
+          <video id="cam" playsinline muted></video>
+          <canvas id="overlay"></canvas>
+          <div class="hud">
+            <div class="hud-count" id="hud-count">–</div>
+            <div class="hud-cmd" id="hud-cmd">camera off</div>
+          </div>
+          <button id="cam-btn" class="btn primary">Enable camera</button>
+          <p class="cam-error" id="cam-error" hidden></p>
+        </div>
+        <canvas id="track" width="640" height="420"></canvas>
+      </div>
+      <p class="fine">Tip: no camera? Use your <kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> arrow keys instead. Everything runs locally in your browser — no video ever leaves your device.</p>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section style="margin-top: 56px;">
+      <h2>How the real thing works</h2>
+      <div class="pipeline">
+        <div class="pipe-step">
+          <h4>1 · See the hand <code>hand_module.py</code></h4>
+          <p>MediaPipe finds 21 hand landmarks in each webcam frame. A finger counts as "up" when its tip sits above its knuckle (thumb: tip past the joint, sideways).</p>
+        </div>
+        <div class="pipe-step">
+          <h4>2 · Count → command <code>final.py</code></h4>
+          <p>The finger count (0–5) is sent as a single character over USB serial to the sender Arduino at 38400 baud.</p>
+        </div>
+        <div class="pipe-step">
+          <h4>3 · Go wireless <code>sender.ino</code></h4>
+          <p>The sender Arduino relays each character over Bluetooth (HC-05) to the car — no wires between you and the robot.</p>
+        </div>
+        <div class="pipe-step">
+          <h4>4 · Drive <code>car.ino</code></h4>
+          <p>The car's Arduino maps the character to motor directions on an H-bridge driver: forward, backward, left, right, stop.</p>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a href="https://github.com/pavan512002/gesture_controlled_robot" target="_blank" rel="noopener" class="btn primary">View the code →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built by Pavan · <a href="https://github.com/pavan512002" target="_blank" rel="noopener">GitHub</a></p>
+  </footer>
+
+  <script type="module" src="demo.js"></script>
+  <script src="../../main.js"></script>
+</body>
+</html>

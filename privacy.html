@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Calendar Slot Finder</title>
+  <meta name="description" content="Privacy policy for the Calendar Slot Finder Chrome extension.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .policy h3 { margin: 28px 0 10px; font-size: 19px; }
+    .policy p, .policy li { color: var(--muted); font-size: 15px; }
+    .policy ul { padding-left: 22px; margin: 8px 0; }
+    .policy p { margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="logo">pavan<span class="accent">.</span></a>
+    <div class="nav-links">
+      <a href="index.html#projects">Projects</a>
+      <a href="https://github.com/pavan512002" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </nav>
+
+  <main class="page policy">
+    <h1>Privacy Policy</h1>
+    <p class="lede">Calendar Slot Finder — Chrome extension. Last updated: September 2026.</p>
+
+    <h3>What this extension does</h3>
+    <p>Calendar Slot Finder helps you find, share, and convert available time slots using your Google Calendar. It runs entirely in your browser as a Chrome extension.</p>
+
+    <h3>Data we access</h3>
+    <ul>
+      <li><strong>Google Calendar data</strong> (via OAuth scopes <code>calendar.readonly</code> and <code>calendar.freebusy</code>): your calendar events and free/busy information, used only to compute available time slots you request. Teammates' free/busy data is read only when you explicitly add them and they have shared their calendar with you.</li>
+      <li><strong>Google account email</strong>: used solely to check your Pro subscription status.</li>
+    </ul>
+
+    <h3>Data we store</h3>
+    <ul>
+      <li><strong>On your device</strong> (chrome.storage): your settings (working hours, timezone, contacts you add) and a cached subscription check. Nothing else.</li>
+      <li><strong>On our server</strong> (Supabase): your email, subscription status, and subscription expiry date — only if you purchase Pro. This is the minimum needed to verify your subscription.</li>
+    </ul>
+
+    <h3>Payments</h3>
+    <p>Pro subscriptions are processed by <strong>Lemon Squeezy</strong>, our Merchant of Record. We never see, handle, or store your card details — all payment information goes directly to Lemon Squeezy under their privacy policy.</p>
+
+    <h3>What we never do</h3>
+    <ul>
+      <li>We never sell, rent, or share your data with third parties for marketing.</li>
+      <li>We never read your email, contacts, or any Google data beyond Calendar free/busy scopes.</li>
+      <li>We never use your calendar data for advertising or profiling.</li>
+    </ul>
+
+    <h3>Data retention & deletion</h3>
+    <p>Settings stay on your device until you remove the extension or clear them. Subscription records are kept while your subscription is active (plus a short grace period) and deleted on request.</p>
+
+    <h3>Contact</h3>
+    <p>For privacy questions or deletion requests, reach out via <a href="https://github.com/pavan512002" target="_blank" rel="noopener">GitHub</a>.</p>
+  </main>
+
+  <footer>
+    <p>Built by Pavan · <a href="https://github.com/pavan512002" target="_blank" rel="noopener">GitHub</a></p>
+  </footer>
+</body>
+</html>
