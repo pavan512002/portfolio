@@ -26,18 +26,47 @@
     </div>
   </nav>
 
-  <header class="hero">
-    <div class="orb orb-a"></div>
-    <div class="orb orb-b"></div>
+  <div class="bg-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div id="spot" aria-hidden="true"></div>
+  <div class="progress" id="progress"></div>
+
+  <header class="hero" id="top">
+    <canvas id="net" aria-hidden="true"></canvas>
     <div class="hero-inner">
-    <p class="hero-kicker enter enter-1">I'm Rachapally Pavan Kumar</p>
-    <h1 class="enter enter-2">I build things<br>that <span class="gradient">move.</span></h1>
-    <p class="hero-sub enter enter-3">Big Data Engineer at Tata Consultancy Services, Hyderabad. By day I build Hive data pipelines and ETL automation — by night I build gesture-controlled robots, deep-learning systems, and Chrome extensions.</p>
-    <div class="hero-cta enter enter-4">
-      <a href="#projects" class="btn primary">See my work</a>
-      <a href="#contact" class="btn ghost">Get in touch</a>
+      <div class="hero-copy">
+        <p class="hero-kicker enter enter-1">I'm Rachapally Pavan Kumar</p>
+        <p class="typed-line enter enter-1" aria-hidden="true"><span class="prompt">&gt;</span>&nbsp;<span id="typed"></span><span class="caret"></span></p>
+        <h1 class="enter enter-2">I build things<br>that <span class="gradient">move.</span></h1>
+        <p class="hero-sub enter enter-3">Big Data Engineer at Tata Consultancy Services, Hyderabad. By day I build Hive data pipelines and ETL automation — by night I build gesture-controlled robots, deep-learning systems, and Chrome extensions.</p>
+        <div class="hero-cta enter enter-4">
+          <a href="#projects" class="btn primary magnetic">See my work</a>
+          <a href="#contact" class="btn ghost magnetic">Get in touch</a>
+        </div>
+        <div class="hero-stats enter enter-5">
+          <div class="hstat"><span class="hstat-num"><span data-count="2">0</span>+</span><span class="hstat-label">Years experience</span></div>
+          <div class="hstat"><span class="hstat-num"><span data-count="12">0</span>+</span><span class="hstat-label">Technologies</span></div>
+          <div class="hstat"><span class="hstat-num"><span data-count="4">0</span></span><span class="hstat-label">Pipeline layers</span></div>
+        </div>
+      </div>
+      <div class="hero-visual enter enter-3">
+        <div class="hud" id="hud">
+          <div class="hud-bar">
+            <span class="hdot r"></span><span class="hdot y"></span><span class="hdot g"></span>
+            <span class="hud-title">hive-etl — live</span>
+            <span class="live"><span class="pulse-dot"></span>LIVE</span>
+          </div>
+          <div class="hud-log" id="hud-log" aria-hidden="true"></div>
+          <div class="hud-chart"><canvas id="spark"></canvas><span class="chart-label">rows / sec</span></div>
+          <div class="hud-stats">
+            <div><span class="k">Status</span><span class="v ok">Running</span></div>
+            <div><span class="k">Rows today</span><span class="v" id="rows">4,182,044</span></div>
+            <div><span class="k">Last sync</span><span class="v" id="sync">just now</span></div>
+          </div>
+        </div>
+        <div class="hud-glow" aria-hidden="true"></div>
+      </div>
     </div>
-    </div>
+    <a class="scroll-cue" href="#experience" aria-label="Scroll to experience"><span></span></a>
   </header>
 
   <div class="snapshot">
