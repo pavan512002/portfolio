@@ -254,3 +254,28 @@
     prog.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
   }, { passive: true });
 })();
+
+// ---------- projects rail: drag to slide left/right ----------
+(function () {
+  const rail = document.querySelector('#projects .cards');
+  if (!rail) return;
+  // keep the hover pop snappy: drop the reveal stagger delay on rail cards
+  rail.querySelectorAll('.card').forEach((c) => { c.style.transitionDelay = '0ms'; });
+  let down = false, startX = 0, startScroll = 0, dragged = false;
+  rail.addEventListener('pointerdown', (e) => {
+    down = true; dragged = false; startX = e.clientX; startScroll = rail.scrollLeft;
+  });
+  window.addEventListener('pointermove', (e) => {
+    if (!down) return;
+    const dx = e.clientX - startX;
+    if (!dragged && Math.abs(dx) > 8) { dragged = true; rail.classList.add('dragging'); }
+    if (dragged) rail.scrollLeft = startScroll - dx;
+  });
+  window.addEventListener('pointerup', () => {
+    down = false; rail.classList.remove('dragging');
+  });
+  // don't fire card links after a drag
+  rail.addEventListener('click', (e) => {
+    if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
+  }, true);
+})();

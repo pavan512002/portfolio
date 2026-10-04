@@ -312,6 +312,28 @@ html { scroll-behavior: smooth; }
 .card { position: relative; }
 .card:hover { transform: translateY(-6px); border-color: #3d3d55; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35); }
 
+/* ---------- projects rail: one line, slides left/right ---------- */
+#projects .cards {
+  display: flex; gap: 24px; overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity; scrollbar-width: none; -ms-overflow-style: none;
+  padding: 22px 6px 32px; cursor: grab;
+}
+#projects .cards::-webkit-scrollbar { display: none; }
+#projects .cards .card {
+  flex: 0 0 min(80vw, 360px); scroll-snap-align: start;
+  transition: transform 0.38s cubic-bezier(0.22, 1.35, 0.36, 1), border-color 0.25s ease, box-shadow 0.38s ease;
+  will-change: transform;
+}
+/* pop-out on hover: lift + springy scale + neon glow */
+#projects .card:hover {
+  transform: translateY(-10px) scale(1.035);
+  border-color: rgba(139, 92, 246, 0.65);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.5), 0 0 46px rgba(139, 92, 246, 0.30);
+  z-index: 2;
+}
+#projects .cards.dragging { cursor: grabbing; scroll-snap-type: none; }
+#projects .cards.dragging .card { pointer-events: none; }
+
 /* command pill pulse on change */
 .hud-cmd.pulse { animation: pulse 0.45s ease; }
 @keyframes pulse {
