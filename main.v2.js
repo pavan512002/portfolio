@@ -255,13 +255,31 @@
   }, { passive: true });
 })();
 
-// ---------- projects rail: drag to slide left/right ----------
+// ---------- projects rail: arrows + drag + half-screen pop-out ----------
 (function () {
   const rail = document.querySelector('#projects .cards');
   if (!rail) return;
-  // keep the hover pop snappy: drop the reveal stagger delay on rail cards
+  // keep hover snappy: drop the reveal stagger delay on rail cards
   rail.querySelectorAll('.card').forEach((c) => { c.style.transitionDelay = '0ms'; });
-  let down = false, startX = 0, startScroll = 0, dragged = false;
+
+  const cards = Array.from(rail.querySelectorAll('.card'));
+  const prev = document.getElementById('railPrev');
+  const next = document.getElementById('railNext');
+  const step = () => (cards[0] ? cards[0].offsetWidth + 24 : 320);
+  function syncArrows() {
+    if (!prev || !next) return;
+    const max = rail.scrollWidth - rail.clientWidth - 4;
+    prev.disabled = rail.scrollLeft <= 4;
+    next.disabled = rail.scrollLeft >= max;
+  }
+  if (prev) prev.addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: 'smooth' }));
+  if (next) next.addEventListener('click', () => rail.scrollBy({ left: step(), behavior: 'smooth' }));
+  rail.addEventListener('scroll', syncArrows, { passive: true });
+  window.addEventListener('resize', syncArrows);
+  syncArrows();
+
+  // drag to slide (desktop mice); a drag never opens the pop-out
+  let down = false, startX = 0, startScroll = 0, dragged = false, suppressClick = false;
   rail.addEventListener('pointerdown', (e) => {
     down = true; dragged = false; startX = e.clientX; startScroll = rail.scrollLeft;
   });
@@ -274,8 +292,111 @@
   window.addEventListener('pointerup', () => {
     down = false; rail.classList.remove('dragging');
   });
-  // don't fire card links after a drag
+  // the click that follows a drag is swallowed here (capture runs first)
   rail.addEventListener('click', (e) => {
-    if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
+    if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; suppressClick = true; }
   }, true);
+
+  /* ----- half-screen pop-out sheet ----- */
+  const PROJECTS = {
+    tapcourt: {
+      kind: 'Mobile + Web App', badge: '<span class="badge live">\u25cf Latest</span>',
+      title: 'TapCourt \u2014 Badminton Live Scoring',
+      lede: 'Live badminton scoring with a full BWF rules engine \u2014 one Flutter codebase shipping to web, Android and iOS, with real-time score sharing and offline support.',
+      tags: ['Flutter', 'Dart', 'Node.js', 'Redis', 'SSE'],
+      points: [
+        'Complete BWF rules engine \u2014 rally scoring, intervals, game/match point, sudden death, serve tracking and undo.',
+        'One Flutter codebase ships the same app to web, Android and iOS.',
+        'Every rally mirrors to a Node.js + Redis backend and streams over Server-Sent Events \u2014 a public watch link lets anyone follow live, no account needed.',
+        'Offline-first: a persisted retry queue replays every rally in order when the network returns.'
+      ],
+      ctas: [{ label: 'Open full page \u2192', href: 'projects/tapcourt/', primary: true }]
+    },
+    gesture: {
+      kind: 'Hardware + AI', badge: '<span class="badge live">\u25cf Live demo</span>',
+      title: 'Gesture-Controlled Robot Car',
+      lede: 'Drive a robot car with nothing but your hand. A webcam tracks your fingers with MediaPipe, and each gesture steers the car over Bluetooth.',
+      tags: ['Python', 'MediaPipe', 'OpenCV', 'Arduino', 'Bluetooth'],
+      points: [
+        'Webcam hand tracking with MediaPipe \u2014 no wearables, no controllers.',
+        '1 finger forward, 2 back, 3 left, 4 right, fist to stop.',
+        'Finger counts stream over Bluetooth to an Arduino driving the car motors.',
+        'Playable right in the browser \u2014 no hardware needed for the demo.'
+      ],
+      ctas: [
+        { label: 'Try the live demo \u2192', href: 'projects/gesture-car/', primary: true },
+        { label: 'Code', href: 'https://github.com/pavan512002/gesture_controlled_robot' }
+      ]
+    },
+    freeslot: {
+      kind: 'Chrome Extension', badge: '',
+      title: 'Calendar Slot Finder',
+      lede: '\u201cWhen are you free?\u201d \u2014 answered in one click. A Chrome extension that reads your Google Calendar and finds, shares, and converts available time slots across timezones.',
+      tags: ['JavaScript', 'Chrome MV3', 'Google Calendar API', 'Supabase', 'Lemon Squeezy'],
+      points: [
+        'Four modes: Solo availability, Team overlap, a visual week picker, and a timezone converter.',
+        'Missing calendar access is reported, never guessed.',
+        'Pro billing via Lemon Squeezy with entitlements in Supabase.',
+        'Time Convert is free forever \u2014 400+ timezones with live UTC offsets.'
+      ],
+      ctas: [{ label: 'Open full page \u2192', href: 'projects/freeslot/', primary: true }]
+    },
+    skin: {
+      kind: 'Deep Learning', badge: '',
+      title: 'Skin Cancer Detection',
+      lede: 'A deep learning system that classifies skin lesion images \u2014 built on transfer learning with a MobileNetV2 backbone, tuned for accuracy across multiple lesion classes.',
+      tags: ['Python', 'TensorFlow', 'MobileNetV2', 'OpenCV', 'CNN'],
+      points: [
+        'MobileNetV2 transfer-learning backbone trained on an augmented lesion dataset.',
+        'Custom dense and dropout layers stacked as the classification head.',
+        'OpenCV preprocessing pipeline \u2014 resizing, normalization, augmentation.',
+        'Dropout regularization keeps multi-class predictions robust without overfitting.'
+      ],
+      ctas: [{ label: 'Open full page \u2192', href: 'projects/skin-cancer/', primary: true }]
+    }
+  };
+
+  const overlay = document.getElementById('projectModal');
+  const body = document.getElementById('modalBody');
+  const closeBtn = document.getElementById('modalClose');
+  if (!overlay || !body) return;
+
+  const esc = (t) => t;
+  function openModal(key) {
+    const p = PROJECTS[key];
+    if (!p) return;
+    body.innerHTML =
+      '<div class="modal-kind">' + (p.badge ? p.badge + ' ' : '') + esc(p.kind) + '</div>' +
+      '<h3 id="modalTitle">' + esc(p.title) + '</h3>' +
+      '<p class="modal-lede">' + esc(p.lede) + '</p>' +
+      '<div class="tags">' + p.tags.map((t) => '<span>' + esc(t) + '</span>').join('') + '</div>' +
+      '<ul class="modal-points">' + p.points.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul>' +
+      '<div class="modal-ctas">' + p.ctas.map((c) =>
+        '<a href="' + c.href + '"' + (c.href.indexOf('http') === 0 ? ' target="_blank" rel="noopener"' : '') +
+        ' class="btn ' + (c.primary ? 'primary' : 'ghost') + '">' + esc(c.label) + '</a>'
+      ).join('') + '</div>';
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeModal() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+
+  // click a card (not a link/button inside it) -> pop out the half-screen sheet
+  cards.forEach((card) => {
+    card.addEventListener('click', (e) => {
+      if (suppressClick) { suppressClick = false; return; }
+      if (e.target.closest('a, button')) return;
+      openModal(card.dataset.project);
+    });
+  });
 })();

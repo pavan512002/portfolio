@@ -312,27 +312,76 @@ html { scroll-behavior: smooth; }
 .card { position: relative; }
 .card:hover { transform: translateY(-6px); border-color: #3d3d55; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35); }
 
-/* ---------- projects rail: one line, slides left/right ---------- */
+/* ---------- projects rail: whole cards, arrow navigation ---------- */
+#projects .sec-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+#projects .sec-head h2 { margin-bottom: 0; }
+.rail-nav { display: flex; gap: 10px; }
+.rail-btn {
+  width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+  background: #1d1d29; border: 1px solid var(--border); color: var(--text);
+  font-size: 18px; line-height: 1; display: flex; align-items: center; justify-content: center;
+  transition: transform 0.25s cubic-bezier(0.22, 1.4, 0.36, 1), border-color 0.2s, box-shadow 0.25s, opacity 0.2s;
+}
+.rail-btn:hover:not(:disabled) { transform: scale(1.12); border-color: rgba(139, 92, 246, 0.6); box-shadow: 0 0 20px rgba(139, 92, 246, 0.35); }
+.rail-btn:disabled { opacity: 0.3; cursor: default; }
 #projects .cards {
   display: flex; gap: 24px; overflow-x: auto; overscroll-behavior-x: contain;
   scroll-snap-type: x proximity; scrollbar-width: none; -ms-overflow-style: none;
-  padding: 22px 6px 32px; cursor: grab;
+  padding: 22px 0 32px; cursor: grab;
 }
 #projects .cards::-webkit-scrollbar { display: none; }
 #projects .cards .card {
-  flex: 0 0 min(80vw, 360px); scroll-snap-align: start;
-  transition: transform 0.38s cubic-bezier(0.22, 1.35, 0.36, 1), border-color 0.25s ease, box-shadow 0.38s ease;
+  flex: 0 0 calc((100% - 48px) / 3); scroll-snap-align: start; cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.22, 1.2, 0.36, 1), border-color 0.25s ease, box-shadow 0.3s ease;
   will-change: transform;
 }
-/* pop-out on hover: lift + springy scale + neon glow */
+@media (max-width: 1023px) { #projects .cards .card { flex-basis: calc((100% - 24px) / 2); } }
+@media (max-width: 639px) { #projects .cards .card { flex-basis: 100%; } }
+/* hover hint: gentle lift — the real pop-out is the half-screen sheet on click */
 #projects .card:hover {
-  transform: translateY(-10px) scale(1.035);
-  border-color: rgba(139, 92, 246, 0.65);
-  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.5), 0 0 46px rgba(139, 92, 246, 0.30);
+  transform: translateY(-6px);
+  border-color: rgba(139, 92, 246, 0.55);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45), 0 0 30px rgba(139, 92, 246, 0.22);
   z-index: 2;
 }
 #projects .cards.dragging { cursor: grabbing; scroll-snap-type: none; }
 #projects .cards.dragging .card { pointer-events: none; }
+
+/* ---------- project pop-out: half-screen sheet ---------- */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200; display: flex;
+  align-items: flex-end; justify-content: center; padding: 0 16px;
+  background: rgba(4, 4, 10, 0.72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  opacity: 0; pointer-events: none; transition: opacity 0.32s ease;
+}
+.modal-overlay.open { opacity: 1; pointer-events: auto; }
+.modal-sheet {
+  width: min(880px, 100%); max-height: 66vh; overflow-y: auto; position: relative;
+  background: linear-gradient(180deg, #17171f, #101016);
+  border: 1px solid rgba(139, 92, 246, 0.4); border-bottom: none; border-radius: 26px 26px 0 0;
+  padding: clamp(28px, 4vw, 48px); padding-top: clamp(38px, 5vw, 54px);
+  box-shadow: 0 -24px 90px rgba(0, 0, 0, 0.65), 0 0 70px rgba(139, 92, 246, 0.20);
+  transform: translateY(70px) scale(0.97); opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.22, 1.28, 0.36, 1), opacity 0.32s ease;
+  scrollbar-width: thin;
+}
+.modal-overlay.open .modal-sheet { transform: none; opacity: 1; }
+@media (max-width: 639px) { .modal-sheet { max-height: 84vh; } }
+.modal-close {
+  position: absolute; top: 16px; right: 16px; width: 40px; height: 40px; border-radius: 50%;
+  background: #1d1d29; border: 1px solid var(--border); color: var(--text);
+  font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: transform 0.25s cubic-bezier(0.22, 1.4, 0.36, 1), border-color 0.2s;
+}
+.modal-close:hover { transform: rotate(90deg) scale(1.1); border-color: rgba(139, 92, 246, 0.6); }
+.modal-kind { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.modal-sheet h3 { font-size: clamp(26px, 4vw, 38px); letter-spacing: -0.5px; margin-bottom: 14px; }
+.modal-lede { color: var(--muted); font-size: 16.5px; line-height: 1.6; margin-bottom: 20px; max-width: 640px; }
+.modal-sheet .tags { margin-bottom: 24px; }
+.modal-points { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+.modal-points li { display: flex; gap: 12px; color: #d6d6e8; font-size: 15px; line-height: 1.55; }
+.modal-points li::before { content: "\2726"; color: var(--accent2); flex-shrink: 0; }
+.modal-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* command pill pulse on change */
 .hud-cmd.pulse { animation: pulse 0.45s ease; }
