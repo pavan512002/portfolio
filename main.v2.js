@@ -263,11 +263,15 @@
   rail.querySelectorAll('.card').forEach((c) => { c.style.transitionDelay = '0ms'; });
 
   const cards = Array.from(rail.querySelectorAll('.card'));
+  const railWrap = document.querySelector('#projects .rail-wrap');
   const prev = document.getElementById('railPrev');
   const next = document.getElementById('railNext');
   const step = () => (cards[0] ? cards[0].offsetWidth + 24 : 320);
   function syncArrows() {
     if (!prev || !next) return;
+    // arrows only when the cards overflow the screen
+    const needs = rail.scrollWidth > rail.clientWidth + 4;
+    if (railWrap) railWrap.classList.toggle('no-arrows', !needs);
     const max = rail.scrollWidth - rail.clientWidth - 4;
     prev.disabled = rail.scrollLeft <= 4;
     next.disabled = rail.scrollLeft >= max;

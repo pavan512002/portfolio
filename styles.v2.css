@@ -312,8 +312,10 @@ html { scroll-behavior: smooth; }
 .card { position: relative; }
 .card:hover { transform: translateY(-6px); border-color: #3d3d55; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35); }
 
-/* ---------- projects rail: whole cards, arrows floating on the cards ---------- */
+/* ---------- projects rail: full-width, fits all cards, arrows only on overflow ---------- */
+#projects { max-width: none; }
 #projects .rail-wrap { position: relative; }
+#projects .rail-wrap.no-arrows .rail-btn { display: none; }
 .rail-btn {
   position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
   width: 46px; height: 46px; border-radius: 50%; cursor: pointer;
@@ -333,12 +335,11 @@ html { scroll-behavior: smooth; }
 }
 #projects .cards::-webkit-scrollbar { display: none; }
 #projects .cards .card {
-  flex: 0 0 calc((100% - 48px) / 3); scroll-snap-align: start; cursor: pointer;
+  flex: 1 0 280px; scroll-snap-align: start; cursor: pointer;
   transition: transform 0.3s cubic-bezier(0.22, 1.2, 0.36, 1), border-color 0.25s ease, box-shadow 0.3s ease;
   will-change: transform;
 }
-@media (max-width: 1023px) { #projects .cards .card { flex-basis: calc((100% - 24px) / 2); } }
-@media (max-width: 639px) { #projects .cards .card { flex-basis: 100%; } }
+@media (max-width: 639px) { #projects .cards .card { flex: 0 0 100%; } }
 /* hover hint: gentle lift — the real pop-out is the half-screen sheet on click */
 #projects .card:hover {
   transform: translateY(-6px);
