@@ -110,7 +110,7 @@
 
   /* ----- typed roles ----- */
   const typedEl = document.getElementById('typed');
-  const roles = ['Big Data Engineer @ TCS', 'Robotics tinkerer', 'Deep-learning explorer', 'Chrome-extension builder'];
+  const roles = ['Java Developer @ TCS', 'Robotics tinkerer', 'Deep-learning explorer', 'Chrome-extension builder'];
   let ri = 0, ci = 0, deleting = false;
   (function typeLoop() {
     const word = roles[ri];
@@ -126,14 +126,14 @@
   const logBox = document.getElementById('hud-log');
   const syncEl = document.getElementById('sync');
   const LOGS = [
-    ['ok', 'stage=bronze ✓ 1,204,553 rows validated'],
-    ['', 'stage=silver ► dedup + schema evolution'],
-    ['ok', 'partition dt=2026-09-23 committed'],
-    ['', 'unix watchdog: 0 errors, checksums match'],
-    ['warn', 'skew on key=user_id → auto-rebalanced'],
-    ['ok', 'stage=gold ✓ dashboard mart refreshed'],
-    ['', 'notify: monthly report delivered ✓'],
-    ['ok', 'compaction done: 14 files → 3, 61% smaller'],
+    ['ok', 'consumer=java-svc-01 ✓ joined group events-grp'],
+    ['', 'topic=in.events ► 42,318 events/sec'],
+    ['ok', 'transform ✓ filter + map + format'],
+    ['', 'topic=out.events ◄ published 42,310'],
+    ['ok', 'cucumber: 17/17 BDD scenarios passing'],
+    ['warn', 'lag on partition 7 → rebalanced'],
+    ['', 'throughput window: 30–50k events/sec'],
+    ['ok', 'checkpoint committed, 0 duplicates'],
   ];
   let li = 0, lastSync = Date.now();
   function stamp() {
