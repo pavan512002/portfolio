@@ -391,10 +391,11 @@
     if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
   });
 
-  // click a card (not a link/button inside it) -> pop out the half-screen sheet
+  // click a card (or its Learn more button) -> pop out the half-screen sheet
   cards.forEach((card) => {
     card.addEventListener('click', (e) => {
       if (suppressClick) { suppressClick = false; return; }
+      if (e.target.closest('[data-open-modal]')) { e.preventDefault(); openModal(card.dataset.project); return; }
       if (e.target.closest('a, button')) return;
       openModal(card.dataset.project);
     });

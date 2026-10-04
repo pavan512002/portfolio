@@ -115,13 +115,8 @@
     </section>
 
     <section id="projects" class="section">
-      <div class="sec-head">
-        <h2>Projects</h2>
-        <div class="rail-nav">
-          <button class="rail-btn" id="railPrev" aria-label="Previous projects">&larr;</button>
-          <button class="rail-btn" id="railNext" aria-label="Next projects">&rarr;</button>
-        </div>
-      </div>
+      <h2>Projects</h2>
+      <div class="rail-wrap">
       <div class="cards">
 
         <article class="card featured" data-project="tapcourt">
@@ -135,7 +130,7 @@
             <span>Flutter</span><span>Dart</span><span>Node.js</span><span>Redis</span><span>SSE</span>
           </div>
           <div class="card-actions">
-            <a href="projects/tapcourt/" class="btn primary">Learn more →</a>
+            <a href="projects/tapcourt/" class="btn primary" data-open-modal>Learn more →</a>
           </div>
         </article>
 
@@ -165,7 +160,7 @@
             <span>JavaScript</span><span>Chrome MV3</span><span>Google Calendar API</span><span>Supabase</span><span>Lemon Squeezy</span>
           </div>
           <div class="card-actions">
-            <a href="projects/freeslot/" class="btn primary">Learn more →</a>
+            <a href="projects/freeslot/" class="btn primary" data-open-modal>Learn more →</a>
           </div>
         </article>
 
@@ -179,10 +174,13 @@
             <span>Python</span><span>TensorFlow</span><span>MobileNetV2</span><span>OpenCV</span><span>CNN</span>
           </div>
           <div class="card-actions">
-            <a href="projects/skin-cancer/" class="btn primary">Learn more →</a>
+            <a href="projects/skin-cancer/" class="btn primary" data-open-modal>Learn more →</a>
           </div>
         </article>
 
+      </div>
+      <button class="rail-btn" id="railPrev" aria-label="Previous projects">&larr;</button>
+      <button class="rail-btn" id="railNext" aria-label="Next projects">&rarr;</button>
       </div>
     </section>
 

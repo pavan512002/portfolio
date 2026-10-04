@@ -312,18 +312,20 @@ html { scroll-behavior: smooth; }
 .card { position: relative; }
 .card:hover { transform: translateY(-6px); border-color: #3d3d55; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35); }
 
-/* ---------- projects rail: whole cards, arrow navigation ---------- */
-#projects .sec-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-#projects .sec-head h2 { margin-bottom: 0; }
-.rail-nav { display: flex; gap: 10px; }
+/* ---------- projects rail: whole cards, arrows floating on the cards ---------- */
+#projects .rail-wrap { position: relative; }
 .rail-btn {
-  width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
-  background: #1d1d29; border: 1px solid var(--border); color: var(--text);
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
+  width: 46px; height: 46px; border-radius: 50%; cursor: pointer;
+  background: rgba(29, 29, 41, 0.94); border: 1px solid rgba(139, 92, 246, 0.45); color: var(--text);
   font-size: 18px; line-height: 1; display: flex; align-items: center; justify-content: center;
-  transition: transform 0.25s cubic-bezier(0.22, 1.4, 0.36, 1), border-color 0.2s, box-shadow 0.25s, opacity 0.2s;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: transform 0.25s cubic-bezier(0.22, 1.4, 0.36, 1), border-color 0.2s, box-shadow 0.25s, opacity 0.2s, background 0.2s;
 }
-.rail-btn:hover:not(:disabled) { transform: scale(1.12); border-color: rgba(139, 92, 246, 0.6); box-shadow: 0 0 20px rgba(139, 92, 246, 0.35); }
-.rail-btn:disabled { opacity: 0.3; cursor: default; }
+#railPrev { left: 10px; }
+#railNext { right: 10px; }
+.rail-btn:hover:not(:disabled) { transform: translateY(-50%) scale(1.14); background: #26263a; box-shadow: 0 0 26px rgba(139, 92, 246, 0.5); }
+.rail-btn:disabled { opacity: 0.25; cursor: default; }
 #projects .cards {
   display: flex; gap: 24px; overflow-x: auto; overscroll-behavior-x: contain;
   scroll-snap-type: x proximity; scrollbar-width: none; -ms-overflow-style: none;
