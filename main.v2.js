@@ -334,14 +334,14 @@
     },
     freeslot: {
       kind: 'Chrome Extension', badge: '',
-      title: 'Calendar Slot Finder',
+      title: 'freeslot',
       lede: '\u201cWhen are you free?\u201d \u2014 answered in one click. A Chrome extension that reads your Google Calendar and finds, shares, and converts available time slots across timezones.',
-      tags: ['JavaScript', 'Chrome MV3', 'Google Calendar API', 'Supabase', 'Lemon Squeezy'],
+      tags: ['JavaScript', 'Chrome MV3', 'Google Calendar API', 'Supabase', 'Polar'],
       points: [
         'Four modes: Solo availability, Team overlap, a visual week picker, and a timezone converter.',
         'Missing calendar access is reported, never guessed.',
-        'Pro billing via Lemon Squeezy with entitlements in Supabase.',
-        'Time Convert is free forever \u2014 400+ timezones with live UTC offsets.'
+        'Pro billing via Polar ($24/year or $3.99/month, 7-day free trial) through a Supabase Edge Function.',
+        'Solo and Time Convert are free \u2014 400+ timezones with live UTC offsets.'
       ],
       ctas: [{ label: 'Open full page \u2192', href: 'projects/freeslot/', primary: true }]
     },
