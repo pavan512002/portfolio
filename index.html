@@ -3,21 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rachapally Pavan Kumar — Java Developer</title>
-  <meta name="description" content="Rachapally Pavan Kumar — Java Developer at TCS, Hyderabad. Builds high-throughput Kafka microservices by day; badminton scoring apps, gesture-controlled robots, and Chrome extensions by night.">
+  <title>Rachapally Pavan Kumar — System Engineer (Java)</title>
+  <meta name="description" content="Rachapally Pavan Kumar — System Engineer (Java) at TCS, Hyderabad. Builds high-throughput Kafka microservices by day; badminton scoring apps, gesture-controlled robots, and Chrome extensions by night.">
   <meta name="theme-color" content="#0a0a10">
-  <meta property="og:title" content="Rachapally Pavan Kumar — Java Developer">
-  <meta property="og:description" content="Java Developer at TCS. Builds Kafka microservices by day; Flutter apps, gesture-controlled robots, deep learning, and Chrome extensions by night.">
+  <meta property="og:title" content="Rachapally Pavan Kumar — System Engineer (Java)">
+  <meta property="og:description" content="System Engineer (Java) at TCS. Builds Kafka microservices by day; Flutter apps, gesture-controlled robots, deep learning, and Chrome extensions by night.">
   <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ctext x='32' y='45' font-family='sans-serif' font-size='36' font-weight='bold' text-anchor='middle' fill='white'%3Ep%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.v2.css">
+  <link rel="stylesheet" href="styles.v2.css?v=3">
+  <link rel="stylesheet" href="wow.css?v=3">
+  <script>try{if(!sessionStorage.getItem('introSeen')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var d=document.documentElement;d.classList.add('intro-lock','hero-hold');setTimeout(function(){d.classList.remove('intro-lock','hero-hold')},5000)}}catch(e){}</script>
 </head>
 <body>
+  <div id="intro" aria-hidden="true"><div class="intro-word" id="introWord"></div><div class="intro-bar"></div></div>
   <nav class="nav">
-    <a href="index.html" class="logo">pavan kumar<span class="accent">.</span></a>
+    <a href="index.html" class="logo"><span class="logo-first">Rachapally </span>Pavan Kumar<span class="accent">.</span></a>
     <div class="nav-links">
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
@@ -38,7 +41,7 @@
         <p class="hero-kicker enter enter-1">I'm Rachapally Pavan Kumar</p>
         <p class="typed-line enter enter-1" aria-hidden="true"><span class="prompt">&gt;</span>&nbsp;<span id="typed"></span><span class="caret"></span></p>
         <h1 class="enter enter-2">I build things<br>that <span class="gradient">move.</span></h1>
-        <p class="hero-sub enter enter-3">Java Developer at Tata Consultancy Services, Hyderabad. By day I build high-throughput Kafka microservices — by night I build badminton scoring apps, gesture-controlled robots, and Chrome extensions.</p>
+        <p class="hero-sub enter enter-3">System Engineer at Tata Consultancy Services, Hyderabad. By day I build high-throughput Java + Kafka microservices — by night I build badminton scoring apps, gesture-controlled robots, and Chrome extensions.</p>
         <div class="hero-cta enter enter-4">
           <a href="#projects" class="btn primary magnetic">See my work</a>
           <a href="#contact" class="btn ghost magnetic">Get in touch</a>
@@ -71,12 +74,17 @@
   </header>
 
   <div class="snapshot">
-    <div class="snap"><span class="snap-label">Role</span><span class="snap-value">Java Developer @ TCS</span></div>
+    <div class="snap"><span class="snap-label">Role</span><span class="snap-value">System Engineer (Java) @ TCS</span></div>
     <div class="snap"><span class="snap-label">Based in</span><span class="snap-value">Hyderabad, India</span></div>
-    <div class="snap"><span class="snap-label">Experience</span><span class="snap-value">Java Dev @ TCS (2025–present) · Big Data (2024–2025)</span></div>
+    <div class="snap"><span class="snap-label">Experience</span><span class="snap-value">System Engineer @ TCS (2024–present)</span></div>
     <div class="snap"><span class="snap-label">Education</span><span class="snap-value">B.Tech CSE (GPA 8.03), GRIET (2020–2024)</span></div>
     <div class="snap"><span class="snap-label">Currently</span><span class="snap-value">Kafka microservices, TapCourt &amp; Chrome extensions</span></div>
   </div>
+
+  <section class="marquee" aria-label="Technologies I work with">
+    <div class="mq-row"><span>Java</span><span>Kafka</span><span>Python</span><span>Hive</span><span>Flutter</span><span>Dart</span><span>Node.js</span><span>Redis</span><span>TensorFlow</span><span>OpenCV</span></div>
+    <div class="mq-row rev"><span>MediaPipe</span><span>Supabase</span><span>PostgreSQL</span><span>Docker</span><span>Cucumber</span><span>Chrome MV3</span><span>Arduino</span><span>SQL</span><span>JavaScript</span><span>MySQL</span></div>
+  </section>
 
   <main>
     <section id="experience" class="section">
@@ -84,31 +92,37 @@
       <div class="timeline">
         <div class="t-item">
           <div class="t-date">Dec 2025 — Present</div>
-          <h3>Java Developer</h3>
+          <h3>System Engineer — Java Developer</h3>
           <div class="t-org">Tata Consultancy Services · Hyderabad</div>
+          <div class="tags"><span>Java</span><span>Kafka</span><span>Cucumber</span><span>BDD</span></div>
           <ul>
-            <li>Own end-to-end development of a Java microservice that consumes events from a Kafka topic, transforms the data, and publishes to a downstream topic.</li>
-            <li>Implemented transformation logic including filtering, mapping, and formatting of event data — achieving high-throughput processing of 30–50k events per second.</li>
-            <li>Created BDD scenarios with Cucumber and automated 17+ test scenarios to verify service behaviour.</li>
+            <li>Owned end-to-end development of a Java microservice that consumes events from a Kafka topic, transforms the data, and publishes to a downstream Kafka topic.</li>
+            <li>Implemented transformation logic including filtering, mapping, and formatting of event data.</li>
+            <li>Achieved high-throughput processing of 30–50k events per second.</li>
+            <li>Created BDD scenarios with Cucumber and performed automation testing, automating 17+ test scenarios to verify service behaviour.</li>
           </ul>
         </div>
         <div class="t-item">
           <div class="t-date">Jul 2024 — Nov 2025</div>
-          <h3>Big Data Engineer</h3>
+          <h3>System Engineer — Big Data Engineer</h3>
           <div class="t-org">Tata Consultancy Services · Hyderabad</div>
+          <div class="tags"><span>Hive</span><span>SQL</span><span>Unix</span><span>Python</span></div>
           <ul>
-            <li>Built and deployed a scalable 4-layer data pipeline on Hive powering a consumption dashboard for technology impact analysis and modernization.</li>
-            <li>Automated the end-to-end ETL pipeline for monthly reporting with Maestro, including custom Unix scripts for file validation and error notification.</li>
-            <li>Created usage insights tracking new, inactive, and active users plus consumed vs. non-consumed resources — and significantly cut reporting time through performance tuning.</li>
+            <li>Developed and deployed a scalable 4-layer data pipeline on Hive, enabling a consumption dashboard that reduced the time for technology impact analysis and modernization.</li>
+            <li>Automated the end-to-end ETL pipeline for monthly reporting using Maestro, including custom Unix scripts for file validation and error notification, ensuring reliable and timely data delivery.</li>
+            <li>Created usage insights for tracking new, inactive, and active users, as well as consumed vs. non-consumed resources, providing actionable intelligence for system optimization and cost management.</li>
+            <li>Significantly improved the performance of data processing for usage insights, leading to a major reduction in reporting time.</li>
           </ul>
         </div>
         <div class="t-item">
           <div class="t-date">Mar 2024 — Jul 2024</div>
           <h3>Teaching Assistant</h3>
           <div class="t-org">Gokaraju Rangaraju Institute of Engineering &amp; Technology · Hyderabad</div>
+          <div class="tags"><span>C</span><span>Python</span><span>DSA</span></div>
           <ul>
-            <li>Mentored students in C, Python, and core programming concepts.</li>
-            <li>Ran Data Structures and Algorithms sessions, building juniors' problem-solving skills for labs and coding evaluations.</li>
+            <li>Assisted students in mastering C, Python, and core programming concepts, strengthening their coding confidence.</li>
+            <li>Conducted sessions on Data Structures and Algorithms, enabling juniors to apply problem-solving techniques effectively.</li>
+            <li>Provided academic and technical mentorship that improved students’ performance in labs and coding evaluations.</li>
           </ul>
         </div>
       </div>
@@ -122,7 +136,7 @@
         <article class="card featured" data-project="tapcourt">
           <div class="card-top">
             <span class="badge live">● Latest</span>
-            <span class="card-kind">Mobile + Web App</span>
+            <span class="card-kind">Mobile + Web App · 2026</span>
           </div>
           <h3>TapCourt — Badminton Live Scoring</h3>
           <p>Live badminton scoring with a full BWF rules engine — one Flutter codebase for web, Android and iOS. Real-time score sharing over Redis + SSE, with offline support when the network drops.</p>
@@ -137,12 +151,12 @@
         <article class="card featured" data-project="gesture">
           <div class="card-top">
             <span class="badge live">● Live demo</span>
-            <span class="card-kind">Hardware + AI</span>
+            <span class="card-kind">Hardware + AI · 2023</span>
           </div>
           <h3>Gesture-Controlled Robot Car</h3>
           <p>Drive a robot car with nothing but your hand. A webcam tracks your fingers with MediaPipe, and each gesture steers the car over Bluetooth — 1 finger forward, 2 back, 3 left, 4 right, fist to stop.</p>
           <div class="tags">
-            <span>Python</span><span>MediaPipe</span><span>OpenCV</span><span>Arduino</span><span>Bluetooth</span>
+            <span>Python</span><span>MediaPipe</span><span>OpenCV</span><span>C++</span><span>Arduino</span><span>Bluetooth</span>
           </div>
           <div class="card-actions">
             <a href="projects/gesture-car/" class="btn primary">Try the live demo →</a>
@@ -152,7 +166,7 @@
 
         <article class="card" data-project="freeslot">
           <div class="card-top">
-            <span class="card-kind">Chrome Extension</span>
+            <span class="card-kind">Chrome Extension · 2026</span>
           </div>
           <h3>freeslot</h3>
           <p>Find, share and convert available time slots from Google Calendar. Four modes: Solo availability, Team overlap, a visual week picker, and a timezone converter — Solo and Time Convert are free; Pro is $24/year or $3.99/month with a 7-day free trial.</p>
@@ -161,12 +175,13 @@
           </div>
           <div class="card-actions">
             <a href="projects/freeslot/" class="btn primary" data-open-modal>Learn more →</a>
+            <a href="https://chromewebstore.google.com/detail/freeslot/ifakanacachncobodmfkedilmnplmfbk" target="_blank" rel="noopener" class="btn ghost">Add to Chrome</a>
           </div>
         </article>
 
         <article class="card" data-project="skin">
           <div class="card-top">
-            <span class="card-kind">Deep Learning</span>
+            <span class="card-kind">Deep Learning · 2023</span>
           </div>
           <h3>Skin Cancer Detection</h3>
           <p>Multi-class skin lesion classifier built on transfer learning — a MobileNetV2 base with custom dense and dropout layers, trained on an augmented OpenCV preprocessing pipeline for robustness.</p>
@@ -188,10 +203,10 @@
       <h2>Publications</h2>
       <div class="cards">
 
-        <article class="card featured">
+        <article class="card featured" data-project="paper">
           <div class="card-top">
             <span class="badge live">● Published</span>
-            <span class="card-kind">Journal paper</span>
+            <span class="card-kind">Journal paper · 2025</span>
           </div>
           <h3>Multilingual Sentiment Analysis</h3>
           <p class="pub-authors"><strong>Rachapally Pavan Kumar</strong>, Vellore Anand Kumar Sahil, Edgar Dcunha Ashley, Harshith Sai Chelmela, Sasishara Kashyap Chaturvedula, K. Anusha</p>
@@ -214,6 +229,7 @@
       <div class="about-grid">
         <div>
           <p style="color: var(--muted); font-size: 16px; margin-bottom: 16px;">B.Tech in Computer Science &amp; Engineering (GPA 8.03) from Gokaraju Rangaraju Institute of Engineering &amp; Technology (2020–2024). I work across the stack — high-throughput Kafka microservices by profession; Flutter apps, computer vision, and browser extensions by passion.</p>
+          <p style="color: var(--muted); font-size: 16px; margin-bottom: 16px;">Before college I studied MPC at Sri Chaitanya Junior Kalasala (2017–2019).</p>
           <p style="color: var(--muted); font-size: 16px;">If it involves turning a terse idea into something real and demoable, I'm in.</p>
         </div>
         <ul class="skills">
@@ -221,16 +237,18 @@
           <li>Kafka · Hive · MySQL · PostgreSQL · Redis</li>
           <li>Flutter · Node.js · Chrome Extensions</li>
           <li>OpenCV · MediaPipe · TensorFlow · Pandas · NumPy</li>
-          <li>Unix · Docker · Cucumber · Supabase</li>
+          <li>Unix · Docker · Cucumber · Supabase · VS Code · PyCharm · IntelliJ</li>
         </ul>
       </div>
     </section>
 
     <section id="contact" class="section">
       <h2>Get in touch</h2>
+      <p class="big-cta">Got an idea?<br><span class="gradient">Let's build it.</span></p>
       <p style="color: var(--muted); margin-bottom: 24px; max-width: 520px;">Open to interesting work, collaborations, and conversations about robots, data, and the web.</p>
       <div class="contact-grid">
-        <a href="mailto:pavan5012002@gmail.com" class="btn primary">pavan5012002@gmail.com</a>
+        <a href="mailto:pavan5012002@gmail.com" class="btn primary magnetic">pavan5012002@gmail.com</a>
+        <button type="button" class="btn ghost" data-copy="pavan5012002@gmail.com">Copy email</button>
         <a href="https://linkedin.com/in/pavan512002/" target="_blank" rel="noopener" class="btn ghost">LinkedIn →</a>
         <a href="https://leetcode.com/u/pavan5012002/" target="_blank" rel="noopener" class="btn ghost">LeetCode →</a>
         <a href="https://github.com/pavan512002" target="_blank" rel="noopener" class="btn ghost">GitHub →</a>
@@ -239,7 +257,7 @@
   </main>
 
   <footer>
-    <p>Rachapally Pavan Kumar · Hyderabad, India · <a href="https://github.com/pavan512002" target="_blank" rel="noopener">GitHub</a></p>
+    <p>Rachapally Pavan Kumar · Hyderabad, India · <a href="https://github.com/pavan512002" target="_blank" rel="noopener">GitHub</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="refund.html">Refunds</a></p>
   </footer>
 
   <div class="modal-overlay" id="projectModal" aria-hidden="true">
@@ -249,6 +267,7 @@
     </div>
   </div>
 
-  <script src="main.v2.js"></script>
+  <script src="main.v2.js?v=3"></script>
+  <script src="wow.js?v=3"></script>
 </body>
 </html>
